@@ -20,7 +20,7 @@ struct agenda{
 };
 
 struct lista{
-	Agenda dado;
+	Agenda* dado;
 	Lista* prox;
 };
  
@@ -28,15 +28,15 @@ Lista* cria_lista(void){
 	return NULL;
 }
 
-Lista* insere_lista(Lista* l, Agenda v){
+Lista* insere_lista(Lista* l, Agenda dado){
 	Lista* novo = (Lista*) malloc(sizeof(Lista));
 	if (novo == NULL)
     {
         printf("ERRO - memoria insuficiente!");
         exit(1);
     }
-	novo->dado = v;
-	novo->prox = l;
+	strcpy(dado.nome, novo);
+    strcpy(char* prox = l, novo);
 	return novo;
 }
 
@@ -45,13 +45,13 @@ int lista_vazia(Lista *l){
 }
 
 void lista_imprime(Lista*l){
-	Lista*p;
-	for(p=l; p!=NULL; p=p->prox){
-		printf(" Info = %d \n", p->dado); //lembrete: consertar erro de leitura do tipo de dado
+	Lista* p;
+	for(p = l; p != NULL; p = p->prox){
+		printf(" Info = %s \n", p->dado); //lembrete: consertar erro de leitura do tipo de dado
 	}
 }
 
-Lista * lista_busca(Agenda elemento, Lista* l){
+Lista * lista_busca(Agenda* elemento, Lista* l){
 	Lista * p;
 	for(p=l; p!=NULL; p=p->prox){
 		if(p->dado == elemento)
@@ -60,7 +60,7 @@ Lista * lista_busca(Agenda elemento, Lista* l){
 	return NULL;
 }
 
-Lista * lista_retira(Lista*l,  Agenda v){
+Lista * lista_retira(Lista*l,  Agenda* v){
     Lista* ant = NULL; 
     Lista* p = l; 
     while(p->dado!=v){
@@ -90,7 +90,7 @@ void lista_libera(Lista* l){
 
 
 
-Lista* lista_insere_ordenada(Lista * l, Agenda v){
+Lista* lista_insere_ordenada(Lista * l, Agenda* v){
 	Lista * novo;
 	Lista * ant = NULL;
 	Lista * p =l;
@@ -112,9 +112,15 @@ Lista* lista_insere_ordenada(Lista * l, Agenda v){
 }
 
 
-
-
-
+/*int main(){
+Lista* l = lst_cria(); 
+	l = lst_insere(l, 2); 
+	l = lst_insere(l, 5);
+	l = lst_insere(l, 4);
+	l= lst_retira(l, 2);
+	l= lst_busca(4, l);
+	lst_imprime(l);
+}*/
 
 
 

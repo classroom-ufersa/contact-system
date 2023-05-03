@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "agenda.h"
  
 void menu();
  
@@ -10,7 +11,17 @@ int main (void){
 }
  
 void menu(){
-  int escolha = 0;
+
+  Lista* l = lst_cria(); /*Cria uma lista*/
+	l = lst_insere(l, 2); /*Insere o elemento na lista*/
+	l = lst_insere(l, 5);
+	l = lst_insere(l, 4);
+	l= lst_retira(l, 2);
+	l= lst_busca(4, l);
+	lst_imprime(l);
+
+
+  /*int escolha = 0;
   printf( "1.\tAdicionar contato\n"
           "2.\tRemover contato\n"
           "3.\tListar contatos cadastrados\n" 
@@ -25,7 +36,7 @@ void menu(){
   } while (escolha < 1 || escolha > 8);
  
   switch (escolha) {
-    /*
+    
     case 1:
       
     case 2:
@@ -40,9 +51,9 @@ void menu(){
       
     case 7:
       
-    */
+    
     case 8:
       return; // seguido de um exit na main, para burlar o aviso de função recursiva infinita.
   }
   menu();
-}
+} */
