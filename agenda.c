@@ -28,15 +28,15 @@ Lista* cria_lista(void){
 	return NULL;
 }
 
-Lista* insere_lista(Lista* l, Agenda dado){
+Lista* lista_insere(Lista* l, Agenda v){
 	Lista* novo = (Lista*) malloc(sizeof(Lista));
 	if (novo == NULL)
     {
         printf("ERRO - memoria insuficiente!");
         exit(1);
     }
-	strcpy(dado.nome, novo);
-    strcpy(char* prox = l, novo);
+	strcpy(v.nome, novo);
+	novo->prox = l;
 	return novo;
 }
 

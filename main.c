@@ -2,24 +2,29 @@
 #include <stdlib.h>
 #include "agenda.h"
  
-void menu();
+//void menu();
  
 int main (void){
-  menu();
-  exit(0);
+  
+}
+
+
+ // menu();
+  //exit(0);
+  //return 0;
+
+ 
+//void menu(){
+  
+  /*Lista* l = cria_lista(); 
+	l = lista_insere(l, v); 
+	l = lista_insere(l, 5);
+	l = lista_insere(l, 4);
+	l= lista_retira(l, 2);
+	l= lista_busca(4, l);
+	lista_imprime(l);
   return 0;
 }
- 
-void menu(){
-
-  Lista* l = lst_cria(); /*Cria uma lista*/
-	l = lst_insere(l, 2); /*Insere o elemento na lista*/
-	l = lst_insere(l, 5);
-	l = lst_insere(l, 4);
-	l= lst_retira(l, 2);
-	l= lst_busca(4, l);
-	lst_imprime(l);
-
 
   /*int escolha = 0;
   printf( "1.\tAdicionar contato\n"

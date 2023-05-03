@@ -11,7 +11,7 @@ typedef struct lista Lista;
 
 Lista* cria_lista(void);
 
-Lista* insere_lista(Lista* l, Agenda dado);
+Lista* lista_insere(Lista* l, Agenda dado);
 
 int lista_vazia(Lista *l);
 
