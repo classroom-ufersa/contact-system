@@ -16,15 +16,38 @@ struct agenda{
     char nome[MAX_CHAR];
     int cod;
     int num;
-    contatos *contato;
+    contatos * contato;
 };
 
-struct lista{
-	Agenda* dado;
-	Lista* prox;
+struct no_lista{
+	Agenda * dado;
+	Node * prox;
 };
+
+Node * criar_lista(Agenda dado){
+    Node * inicio = (node *) malloc (sizeof(node));
+	if(inicio == NULL){
+		printf("Erro ao tentar locar memória")
+	}
+    inicio->dado = dado;
+    inicio->prox = NULL;
+    return inicio;
+}
  
-Lista* cria_lista(void){
+int main(void) {
+    Node* inicio = create_list(1);
+    Node* lista = inicio;
+    while (lista != NULL) {
+        printf("%d ", lista->dado);
+        lista = lista->prox;
+    }
+    return 0;
+}
+
+
+
+
+/*Lista* cria_lista(void){
 	return NULL;
 }
 
@@ -112,40 +135,20 @@ Lista* lista_insere_ordenada(Lista * l, Agenda* v){
 }
 
 
-/*int main(){
-Lista* l = lst_cria(); 
-	l = lst_insere(l, 2); 
-	l = lst_insere(l, 5);
-	l = lst_insere(l, 4);
-	l= lst_retira(l, 2);
-	l= lst_busca(4, l);
-	lst_imprime(l);
-}*/
 
 
-
-
-
-/*struct flano{
-    flacontatos dado;
-    no *prox;
+/*struct no{
+    Agenda dado;
+    No *prox;
 };
  
 struct lista{
-    no * inicio;
+    No * inicio;
 };
- 
-void criar_inicio(flalista *lista, flacontatos dado){
-    no * novo = (no*) malloc (sizeof(no));
-    novo =! NULL ? novo->prox = NULL : novo;
-    novo->dado = dado;
-    novo->prox = lista->inicio;
-    lista->inicio = novo;
-}*/
  
 void adiciona(){
   /*if (lista.inicio == NULL){
     criar_inicio();
-  } */
-}
+  } 
+}*/
  
