@@ -20,72 +20,87 @@ struct agenda{
 };
  
 struct no_lista{
-    Agenda * dado;
+    Agenda dado;
     Node * prox;
 };
  
-Node * criar_lista(Agenda * dado){
+Node * criar_lista(){
   Node * inicio = (Node *) malloc (sizeof(Node));
     if(inicio == NULL){
         printf("Erro ao tentar locar memória");
+    exit(1);
     }
-  inicio->dado = dado;
+  // inicio->dado = NULL;
+  Agenda agenda;
+  strcpy(agenda.nome,"");
+  inicio->dado = agenda;
   inicio->prox = NULL;
   return inicio;
 }
-
-
  
-int main(void) {
-    Agenda * novoDado = (Agenda*) malloc(sizeof(Agenda));
-    Node* lista = criar_lista(novoDado);
-    while (lista != NULL) {
-      //lista->dado->num = 50;
-      printf("%d\n", lista->dado->num);
-      lista = lista->prox;
+Node * lista_busca(char* elemento, Node* l){
+    Node* p;
+    for(p=l; p!=NULL; p=p->prox){
+        if(strcmp(p->dado.nome,elemento)==0){
+            return p;
     }
-    return 0;
+    }
+    return (elemento=NULL) ? p: NULL;
+  // return NULL;
 }
-
-
-
-
-
-
-
  
-/*
- 
-Lista* lista_insere(Lista* l, Agenda v){
-    Lista* novo = (Lista*) malloc(sizeof(Lista));
-    if (novo == NULL)
-    {
-        printf("ERRO - memoria insuficiente!");
-        exit(1);
-    }
+void lista_insere(Node* l, Agenda v){
+  // Node* l = lista principal
+  // Agenda* v = nova informação
+  Node* alvo = lista_busca(NULL,l);
+  alvo->dado = v;
+  alvo->prox = NULL;
+  /*
+    Node* novo = (Node*) malloc(sizeof(Node));
+    if (novo == NULL){
+    printf("ERRO - memoria insuficiente!");
+    exit(1);
+  }
     strcpy(v.nome, novo);
-    novo->prox = l;
-    return novo;
+  */
 }
  
-int lista_vazia(Lista *l){
+int lista_vazia(Node* l){ // Questiona se lista está vazia
     return (l==NULL);
 }
+ 
+int main(void) {
+    Node* lista = criar_lista();
+    // Agenda* novaAgenda = (Agenda*) malloc(sizeof(Agenda));
+    Agenda novaAgenda;
+    // novaAgenda->num = 7;
+    strcpy(novaAgenda.nome,"PIROCA");
+    novaAgenda.num = 7;
+    lista_insere(lista, novaAgenda);
+    Node* nodaAlvo = lista_busca(novaAgenda.nome, lista);
+    printf("[1] Valor do Num: %i\n", nodaAlvo->dado.num);
+    novaAgenda.num = 9;
+    printf("[1] Valor do Num: %i\n", nodaAlvo->dado.num);
+    /*
+    lista_insere(lista,novaAgenda);
+    nodaAlvo = lista_busca(novaAgenda, lista);
+    printf("[2] Valor do Num: %i\n", nodaAlvo->dado->num);
+    */
+    /*
+    while (lista != NULL) {
+      lista = lista->prox;
+    }
+    */
+    return 0;
+}
+/*
+ 
  
 void lista_imprime(Lista*l){
     Lista* p;
     for(p = l; p != NULL; p = p->prox){
         printf(" Info = %s \n", p->dado); //lembrete: consertar erro de leitura do tipo de dado
     }
-}
- 
-Lista * lista_busca(Agenda* elemento, Lista* l){
-    Lista * p;
-    for(p=l; p!=NULL; p=p->prox){
-        if(p->dado == elemento)
-            return p;
-    }
-    return NULL;
 }
  
 Lista * lista_retira(Lista*l,  Agenda* v){
@@ -154,3 +169,4 @@ void adiciona(){
   } 
 }
 */
+ 
