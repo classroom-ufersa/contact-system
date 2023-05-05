@@ -14,17 +14,7 @@ int main (void){
   //return 0;
 
  
-//void menu(){
-  
-  /*Lista* l = cria_lista(); 
-	l = lista_insere(l, v); 
-	l = lista_insere(l, 5);
-	l = lista_insere(l, 4);
-	l= lista_retira(l, 2);
-	l= lista_busca(4, l);
-	lista_imprime(l);
-  return 0;
-}
+//void menu(void){
 
   /*int escolha = 0;
   printf( "1.\tAdicionar contato\n"
