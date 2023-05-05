@@ -98,7 +98,7 @@ void lista_libera(Node * l){
     }
 } //teste
 
-//adicionar contato -- lista_insere - agenda --------- buscando apenas dados de agendas (precisa buscar dados de contatos)
+//adicionar contato -- lista_insere - agenda --------- buscando apenas dados de agendas (precisa buscar dados de contatos) / adicionar por lista ou criar uma função separada (?)
 
 //remover contato -- lista_retira - agenda ----------- manipulando apenas agendas (precisa manipular contatos)
 
