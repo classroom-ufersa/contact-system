@@ -171,10 +171,46 @@ void lista_libera_Contato(Node2 * m){
 }
 
 void adiciona_contato(){
+  int qnt_add, index;
+  printf("quantidade add: \n");
+  scanf("%d", &qnt_add);
+  for(index = 0; index < qnt_add; index++){
+    lista_insere_Contato(lista2, novoContato);
+  }
+}
+
+void remover_contato(){
+  int qnt_remove, index;
+  printf("quantos remove \n");
+  scanf("%d", &qnt_remove);
+  for(index = 0; index < qnt_remove; index++){
+    lista_retira_Contato(lista2, 19);
+  }
+}
+
+void imprimir_contato_cadastrado(){
+  lista_imprime_Contato(lista2);
+}
+
+void editar_contato(){
 
 }
 
-void 
+void buscar_contato(){
+
+}
+
+void consultar_contato_em_agenda(){
+
+}
+
+void quantitativo_agenda(){
+
+}
+
+void sair(){
+
+}
 
 //buscando apenas dados de agendas (precisa buscar dados de contatos)
 
@@ -258,6 +294,9 @@ int main(void) {
 
 ///////////////////////////////////////////////////LISTA DE COISAS FEITAS PARCIALMENTE//////////////////////////////////////////////
 //-LISTAS DE AGENDA E CONTATO
+//-MENU ADICIONAR CONTATO
+//-MENU REMOVER CONTATO
+//-MENU LISTAR CONTATO
 
 
 
