@@ -98,25 +98,25 @@ void lista_libera(Node * l){
     }
 } //teste
 
-//adicionar contato -- lista_insere-agenda
+//adicionar contato -- lista_insere - agenda --------- buscando apenas dados de agendas (precisa buscar dados de contatos)
 
-//remover contato -- lista_retira-agenda
+//remover contato -- lista_retira - agenda ----------- manipulando apenas agendas (precisa manipular contatos)
 
-//listar contatos cadastrados
+//listar contatos cadastrados ---------- ao total ou em cada lista(se for utilizado diferentes agendas) (?)
 
 //editar o contato
 
 //buscar contato -- lista_busca-agenda
 
-//consultar contato em uma dada agenda
+//consultar contato em uma dada agenda ----------------- criar lista para diferentes agendas (?)
 
-//consultar quantitativos de agendas
+//consultar quantitativos de agendas ---------------- quantidade de agendas ou quantidade de contatos em uma agenda (?)
 
 //gnomeSort
 
-//arquivo texto
+//arquivo texto ---------------- 1 para agenda e 1 para contato
 
-//sair
+//sair ----------- encerrar o programa
  
 int main(void) {
   Node * lista = criar_lista();
