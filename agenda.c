@@ -28,6 +28,7 @@ Node * criar_lista(){
   Node * inicio = (Node *) malloc (sizeof(Node));
     if(inicio == NULL){
         printf("Erro ao tentar alocar memória");
+        exit(1);
     exit(1);
     }
   // inicio->dado = NULL;
@@ -52,11 +53,10 @@ void lista_retira(Node * l, int v){
   Node** anteriorAddress = (Node**) malloc(sizeof(Node*));
   if(anteriorAddress == NULL){
     printf("Erro ao alocar memória!");
+    exit(1);
   }
   Node * alvo = lista_busca(v, l, anteriorAddress);
   Node * anterior = *anteriorAddress;
-  if (anterior == NULL){
-  }
   if (alvo != NULL) {
     if (anterior != NULL) {
       anterior->prox = alvo->prox;
