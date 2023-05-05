@@ -36,8 +36,8 @@ Node * criar_lista(){
   return inicio;
 }
  
-Node * lista_busca(int elemento, Node* l, Node** anterior){
-  Node* p;
+Node * lista_busca(int elemento, Node * l, Node** anterior){
+  Node * p;
   for(p = l; p != NULL; p = p->prox){
     if(p->dado.cod == elemento){
       return p;
@@ -48,10 +48,13 @@ Node * lista_busca(int elemento, Node* l, Node** anterior){
   return NULL;
 }
  
-void lista_retira(Node *l, int v){
-  Node **anteriorAddress = (Node**) malloc(sizeof(Node*));
-  Node *alvo = lista_busca(v, l, anteriorAddress);
-  Node *anterior = *anteriorAddress;
+void lista_retira(Node * l, int v){
+  Node** anteriorAddress = (Node**) malloc(sizeof(Node*));
+  if(anteriorAddress == NULL){
+    printf("Erro ao alocar memória!");
+  }
+  Node * alvo = lista_busca(v, l, anteriorAddress);
+  Node * anterior = *anteriorAddress;
   if (anterior == NULL){
   }
   if (alvo != NULL) {
@@ -63,20 +66,20 @@ void lista_retira(Node *l, int v){
   }
 }
  
-void lista_insere(Node* l, Agenda v){
+void lista_insere(Node * l, Agenda v){
   // Node* l = lista principal
   // Agenda v = nova informação
-  Node* alvo = lista_busca(0,l,NULL);
+  Node * alvo = lista_busca(0,l,NULL);
   alvo->dado = v;
   alvo->prox = (Node*) malloc(sizeof(Node));
 }
  
-int lista_vazia(Node* l){ // Questiona se lista está vazia
+int lista_vazia(Node * l){ // Questiona se lista está vazia
     return (l==NULL);
 }
  
-void lista_imprime(Node*l){
-    Node* p;
+void lista_imprime(Node * l){
+    Node * p;
     for(p = l; p->prox != NULL; p = p->prox){
         printf("Nome = %s\nCódigo = %i\nNúmero = %i\n", p->dado.nome, p->dado.cod, p->dado.num);
     //lembrete: consertar erro de leitura do tipo de dado
@@ -85,9 +88,9 @@ void lista_imprime(Node*l){
 
 
  
-void lista_libera(Node* l){
-    Node* p = l;
-    Node* t;
+void lista_libera(Node * l){
+    Node * p = l;
+    Node * t;
     while (p != NULL) {
         t = p->prox;
         free(p);
@@ -95,10 +98,28 @@ void lista_libera(Node* l){
     }
 } //teste
 
+//adicionar contato -- lista_insere-agenda
 
+//remover contato -- lista_retira-agenda
+
+//listar contatos cadastrados
+
+//editar o contato
+
+//buscar contato -- lista_busca-agenda
+
+//consultar contato em uma dada agenda
+
+//consultar quantitativos de agendas
+
+//gnomeSort
+
+//arquivo texto
+
+//sair
  
 int main(void) {
-  Node* lista = criar_lista();
+  Node * lista = criar_lista();
   Agenda novaAgenda;
   strcpy(novaAgenda.nome,"TESTE1");
   novaAgenda.num = 7;
@@ -125,6 +146,8 @@ int main(void) {
   lista_retira(lista,235);
   lista_imprime(lista);
   lista_libera(lista);
+
+  //menu de opções
   return 0;
 }
  
