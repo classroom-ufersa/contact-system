@@ -94,6 +94,8 @@ void lista_libera(Node* l){
         p = t;
     }
 } //teste
+
+
  
 int main(void) {
   Node* lista = criar_lista();

@@ -1,5 +1,5 @@
-#ifndef FLAGENDA_H_INCLUDED
-#define FLAGENDA_H_INCLUDED
+#ifndef AGENDA_H_INCLUDED
+#define AGENDA_H_INCLUDED
  
 typedef struct contact contatos;
  
