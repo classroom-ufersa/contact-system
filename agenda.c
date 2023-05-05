@@ -82,6 +82,18 @@ void lista_imprime(Node*l){
     //lembrete: consertar erro de leitura do tipo de dado
     }
 }
+
+
+ 
+void lista_libera(Node* l){
+    Node* p = l;
+    Node* t;
+    while (p != NULL) {
+        t = p->prox;
+        free(p);
+        p = t;
+    }
+} //teste
  
 int main(void) {
   Node* lista = criar_lista();
@@ -110,6 +122,7 @@ int main(void) {
   printf("------------------------------------------------\n");
   lista_retira(lista,235);
   lista_imprime(lista);
+  lista_libera(lista);
   return 0;
 }
  
