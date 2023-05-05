@@ -90,11 +90,11 @@ void lista_imprime(Node * l){
  
 void lista_libera(Node * l){
     Node * p = l;
-    Node * t;
+    Node * temp;
     while (p != NULL) {
-        t = p->prox;
+        temp = p->prox;
         free(p);
-        p = t;
+        p = temp;
     }
 } //teste
 
