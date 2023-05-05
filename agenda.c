@@ -85,8 +85,6 @@ void lista_imprime(Node * l){
     //lembrete: consertar erro de leitura do tipo de dado
     }
 }
-
-
  
 void lista_libera(Node * l){
     Node * p = l;
@@ -154,27 +152,21 @@ int main(void) {
  
 /*
  
-void lista_libera(Lista* l){
-    Lista* p = l;
-    Lista* t;
-    while (p != NULL) {
-        t = p->prox;
-        free(p);
-        p = t;
-    }
-}
- 
-Lista* lista_insere_ordenada(Lista * l, Agenda* v){
-    Lista * novo;
-    Lista * ant = NULL;
-    Lista * p =l;
-    while(p!=NULL && p->dado<v){
+Lista* lista_insere_ordenada(Node * l, Agenda* v){
+    Node * novo;
+    Node * ant = NULL;
+    Node * p = l;
+    while(p != NULL && p->dado < v){
         ant = p;
         p = p->prox;
     }
-    novo = (Lista*) malloc(sizeof(Lista));
+    novo = (Node*) malloc(sizeof(Node));
+    if(novo == NULL){
+        printf("Erro de alocação de memória");
+        exit(1);
+    }
     novo->dado = v;
-    if(ant ==NULL){
+    if(ant == NULL){
         novo->prox = l;
         l = novo;
     }
@@ -184,16 +176,7 @@ Lista* lista_insere_ordenada(Lista * l, Agenda* v){
     }
     return l;
 }
- 
-struct no{
-    Agenda dado;
-    No *prox;
-};
- 
-struct lista{
-    No * inicio;
-};
- 
+
 void adiciona(){
   if (lista.inicio == NULL){
     criar_inicio();
