@@ -177,8 +177,8 @@ void adiciona_contato(contatos Contato){
   scanf("%d", &qnt_add);
   for(index = 0; index < qnt_add; index++){
     printf("Nome: \n");
-    fgets(contatoADD.name, MAX_CHAR, stdin);
-    //contatoADD.name[strcspn(contatoADD.name, "\n")] = '\0'; // remover o caractere '\n' do final da string
+    fgets(contatoADD.nome, MAX_CHAR, stdin);
+    //contatoADD.nome[strcspn(contatoADD.nome, "\n")] = '\0'; // remover o caractere '\n' do final da string
     printf("Idade: \n");
     scanf("%u", &contatos.idade);
     printf("Telefone: \n");
@@ -197,13 +197,27 @@ void adiciona_contato(contatos Contato){
 }
 
 void remover_contato(contatos Contato){
+  contatos contatoRemov;
   int qnt_remove, index, cont, procura = 0;
   printf("informe o codigo da agenda que quer remover um contato \n");
   scanf("%d", &Agenda->cod); //concertar
   printf("quantos remove \n");
   scanf("%d", &qnt_remove);
   for(index = 0; index < qnt_remove; index++){
-
+    /*for (int index = 0; index < *contatoRemov; index++) { //adicionar nas funções de lista agenda: contatoRemov 
+        if (strcmp(contatos[index].nome, nome) == 0) {
+            procura = 1;
+            for (int cont = index; cont < *contatoRemov - 1; cont++) {
+                contatos[cont] = contatos[cont + 1];
+            }
+            (*contatosRemmov)--;
+            printf("Contato \"%s\" removido com sucesso!\n", nome);
+            break;
+        }
+    }
+    if (!procura) {
+        printf("Contato \"%s\" não encontrado na agenda.\n", nome);
+    }*/
     //lista_retira_Contato(lista2, 19);
   }
 }
