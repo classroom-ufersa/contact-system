@@ -224,7 +224,11 @@ void remover_contato(contatos Contato){
 }
 
 void imprimir_contato_cadastrado(){
-  lista_imprime_Contato(lista2);
+  int index;
+  for(index = 0; index < qnt_total; index++){
+    printf("Nome: %s\nIdade: %u\nTelefone: %u\nEmail: %s\n", contatos.nome, contatos.idade, contatos.tel, contatos.email);
+  }
+  //lista_imprime_Contato(lista2);
 }
 
 void editar_contato(){
