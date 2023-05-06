@@ -170,21 +170,41 @@ void lista_libera_Contato(Node2 * m){
     }
 }
 
-void adiciona_contato(){
+void adiciona_contato(contatos Contato){
   int qnt_add, index;
+  contatos contatoADD;
   printf("quantidade add: \n");
   scanf("%d", &qnt_add);
   for(index = 0; index < qnt_add; index++){
-    lista_insere_Contato(lista2, novoContato);
+    printf("Nome: \n");
+    fgets(contatoADD.name, MAX_CHAR, stdin);
+    //contatoADD.name[strcspn(contatoADD.name, "\n")] = '\0'; // remover o caractere '\n' do final da string
+    printf("Idade: \n");
+    scanf("%u", &contatos.idade);
+    printf("Telefone: \n");
+    scanf("%u", &contatos.tel);
+    getchar();
+    printf("E-mail: \n");
+    fgets(contatoADD.email, MAX_CHAR, stdin);
+    //contatoADD.email[strcspn(contatoADD.email, "\n")] = '\0'; 
+    //contatos[*qnt_add] = contatoADD;
+    //*contatoADD = contatoADD + 1;
+    printf("Contato adicionado com sucesso!\n");
+
+    //lista_insere_Contato(lista2, novoContato);
   }
+  return(contatoADD);
 }
 
-void remover_contato(){
-  int qnt_remove, index;
+void remover_contato(contatos Contato){
+  int qnt_remove, index, cont, procura = 0;
+  printf("informe o codigo da agenda que quer remover um contato \n");
+  scanf("%d", &Agenda->cod); //concertar
   printf("quantos remove \n");
   scanf("%d", &qnt_remove);
   for(index = 0; index < qnt_remove; index++){
-    lista_retira_Contato(lista2, 19);
+
+    //lista_retira_Contato(lista2, 19);
   }
 }
 
@@ -235,6 +255,11 @@ void sair(){
 //sair ----------- encerrar o programa
  
 int main(void) {
+  contatos * Contato = (contatos*) malloc (sizeof(contatos));
+  if(Contato == NULL){
+    printf("Erro ao alocar memória");
+    exit(1);
+  }
   Node * lista = criar_lista_Agenda();
   Agenda novaAgenda;
   strcpy(novaAgenda.nome,"TESTE1");
