@@ -193,7 +193,7 @@ void adiciona_contato(contatos Contato){
 
     //lista_insere_Contato(lista2, novoContato);
   }
-  return(contatoADD);
+  //return(contatoADD);
 }
 
 void remover_contato(contatos Contato){
@@ -220,6 +220,7 @@ void remover_contato(contatos Contato){
     }*/
     //lista_retira_Contato(lista2, 19);
   }
+  //return(contatoRemov);
 }
 
 void imprimir_contato_cadastrado(){
