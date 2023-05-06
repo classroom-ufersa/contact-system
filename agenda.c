@@ -216,7 +216,7 @@ void remover_contato(contatos Contato){
         }
     }
     if (!procura) {
-        printf("Contato \"%s\" não encontrado na agenda.\n", nome);
+        printf("Contato %s não encontrado na agenda.\n", nome);
     }*/
     //lista_retira_Contato(lista2, 19);
   }
@@ -232,11 +232,42 @@ void imprimir_contato_cadastrado(){
 }
 
 void editar_contato(){
-
+  int index, procura = 0;
+    for (index = 0; index < Contato; index++) {
+        if (strcmp(contatos[index].nome, nome) == 0) {
+            procura = 1;
+            printf("Digite a nova idade: \n");
+            fgets(contatos[index].nome, MAX_CHAR, stdin);
+            printf("Digite o novo número de telefone: \n");
+            scanf("%u", contatos[index].tel);
+            getchar();
+            printf("Digite o novo endereço de e-mail: \n");
+            scanf("%s", contatos[index].email);
+            getchar();
+            printf("Contato %s atualizado com sucesso!\n", nome);
+            break;
+        }
+    }
+    if (!procura) {
+        printf("Contato %s não encontrado na agenda.\n", nome);
+    }
 }
 
 void buscar_contato(){
-
+  int index, procura = 0;
+    for (index = 0; index < Contato; index++) {
+        if (strcmp(contatos[index].nome, nome) == 0) {
+            procura = 1;
+            printf("Nome: %s\n", contatos[index].nome);
+            printf("Idade: %u", contatos[index].idade);
+            printf("Telefone: %s\n", contatos[index].tel);
+            printf("E-mail: %s\n", contatos[index].email);
+            break;
+        }
+    }
+    if (!procura) {
+        printf("Contato %s não encontrado na agenda.\n", nome);
+    }
 }
 
 void consultar_contato_em_agenda(){
