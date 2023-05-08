@@ -186,20 +186,20 @@ void imprime_contato(Node2 * contato){
   printf("Nome: %s\nIdade: %i\nTelefone: %i\nEmail: %s\n",contato->dado.nome,contato->dado.idade,contato->dado.tel,contato->dado.email);
 }
 
-void adiciona_contato(contatos Contato){ // Revisar
+void adiciona_contato(Node2 * add){ // Revisar
   int qnt_add, index;
-  contatos contatoADD;
+  Node2 contatoADD;
   printf("quantidade add: \n");
   scanf("%d", &qnt_add);
   for(index = 0; index < qnt_add; index++){
     printf("Nome: \n");
-    editar_char(contatoADD.nome);
+    editar_char(contatoADD.dado.nome);
     printf("Idade: \n");
-    scanf("%u", &contatoADD.idade);
+    scanf("%u", &contatoADD.dado.idade);
     printf("Telefone: \n");
-    scanf("%u", &contatoADD.tel);
+    scanf("%u", &contatoADD.dado.tel);
     printf("E-mail: \n");
-    editar_char(contatoADD.email); 
+    editar_char(contatoADD.dado.email); 
     //contatos[*qnt_add] = contatoADD;
     //*contatoADD = contatoADD + 1;
     printf("Contato adicionado com sucesso!\n");
@@ -291,7 +291,7 @@ void buscar_contato(Node * l){
   scanf("%i",&cod);
   Node * alvoAgenda = lista_busca_Agenda(cod, l, NULL);
   printf("Digite nome do contato:\n");
-  char * alvo;
+  char * alvo = (char*)malloc(MAX_CHAR*sizeof(char));
   editar_char(alvo);
   Node2 * alvoContato = lista_busca_Contato(alvo, alvoAgenda->dado.contato, NULL);
   if (alvoContato!=NULL){
@@ -356,54 +356,67 @@ int main(void) {
   }
   Node * lista = criar_lista_Agenda();
   Agenda novaAgenda;
-  strcpy(novaAgenda.nome,"TESTE1");
-  novaAgenda.num = 7;
-  novaAgenda.cod = 235;
-  lista_insere_Agenda(lista, novaAgenda);
+  //menu
+  adiciona_contato(Contato);
+  remover_contato(Contato);
+  imprimir_contatos_cadastrado(Contato);
+  editar_contato(Contato);
+  buscar_contato(Contato);
+  //consultar_contato_agenda(Contato);
+  //quantitativo_agenda(Agenda);
+
+
+
+
+
+  //strcpy(novaAgenda.nome,"TESTE1");
+  //novaAgenda.num = 7;
+  //novaAgenda.cod = 235;
+  //lista_insere_Agenda(lista, novaAgenda);
   // Node* nodaAlvo = lista_busca(novaAgenda.cod, lista);
   // printf("[1] Valor do Num: %i\nValor do nome: %s\n", nodaAlvo->dado.num, nodaAlvo->dado.nome);
   // - Inserir o primeiro dado
-  novaAgenda.num = 9;
-  novaAgenda.cod = 236;
-  strcpy(novaAgenda.nome,"TESTE2");
-  lista_insere_Agenda(lista,novaAgenda);
+  //novaAgenda.num = 9;
+  //novaAgenda.cod = 236;
+  //strcpy(novaAgenda.nome,"TESTE2");
+  //lista_insere_Agenda(lista,novaAgenda);
   // nodaAlvo = lista_busca(novaAgenda.cod, lista);
   // printf("[2] Valor do Num: %i\nValor do nome: %s\n", nodaAlvo->dado.num, nodaAlvo->dado.nome);
   // - Inserir o segundo dado
-  novaAgenda.num = 11;
-  novaAgenda.cod = 237;
-  strcpy(novaAgenda.nome,"TESTE3");
-  lista_insere_Agenda(lista,novaAgenda);
+  //novaAgenda.num = 11;
+  //novaAgenda.cod = 237;
+  //strcpy(novaAgenda.nome,"TESTE3");
+  //lista_insere_Agenda(lista,novaAgenda);
   // nodaAlvo = lista_busca(novaAgenda.cod, lista);
   // printf("[3] Valor do Num: %i\nValor do nome: %s\n", nodaAlvo->dado.num, nodaAlvo->dado.nome);
-  lista_imprime_Agenda(lista);
+  //lista_imprime_Agenda(lista);
   printf("------------------------------------------------\n");
-  lista_retira_Agenda(lista,235);
-  lista_imprime_Agenda(lista);
-  lista_libera_Agenda(lista);
+  //lista_retira_Agenda(lista,235);
+  //lista_imprime_Agenda(lista);
+  //lista_libera_Agenda(lista);
 
   printf("\n\n\n");
 
 
-  Node2 * lista2 = criar_lista_Contato();
-  contatos novoContato;
-  strcpy(novoContato.nome,"TESTE1.2");
-  novoContato.tel = 19915126639;
-  novoContato.idade = 19;
-  lista_insere_Contato(lista2, novoContato);
-  novoContato.tel = 18625488658;
-  novoContato.idade = 23;
-  strcpy(novoContato.nome,"TESTE2.2");
-  lista_insere_Contato(lista2, novoContato);
-  novoContato.tel = 11625488658;
-  novoContato.idade = 23;
-  strcpy(novoContato.nome,"TESTE3.2");
-  lista_insere_Contato(lista2, novoContato);
-  lista_imprime_Contato(lista2);
+  //Node2 * lista2 = criar_lista_Contato();
+  //contatos novoContato;
+  ///strcpy(novoContato.nome,"TESTE1.2");
+  //novoContato.tel = 19915126639;
+  //novoContato.idade = 19;
+  //lista_insere_Contato(lista2, novoContato);
+  //novoContato.tel = 18625488658;
+  //novoContato.idade = 23;
+  //strcpy(novoContato.nome,"TESTE2.2");
+  //lista_insere_Contato(lista2, novoContato);
+  //novoContato.tel = 11625488658;
+  //novoContato.idade = 23;
+  //strcpy(novoContato.nome,"TESTE3.2");
+  //lista_insere_Contato(lista2, novoContato);
+  //lista_imprime_Contato(lista2);
   printf("------------------------------------------------\n");
   // lista_retira_Contato(lista2, 19);
-  lista_imprime_Contato(lista2);
-  lista_libera_Contato(lista2);
+  //lista_imprime_Contato(lista2);
+  //lista_libera_Contato(lista2);
 
 
   //menu de opções
