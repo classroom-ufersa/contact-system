@@ -16,18 +16,30 @@ struct agenda{
   char nome[MAX_CHAR];
   int cod;
   int num;
-  contatos * contato;
+  Node2 * contato;
 };
  
 struct no_lista_Agenda{
-    Agenda dado;
-    Node * prox;
+  Agenda dado;
+  Node * prox;
 };
+
 struct no_lista_Contato{
-  contatos dados;
-  Node2 * proxi;
+  contatos dado;
+  Node2 * prox;
 };
  
+
+void editar_char(char* alvo){
+  if (alvo==NULL){
+    printf("char possivelmente não alocado.\n");
+    exit(1);
+  }
+  getchar(); // remove possível lixo do scanf
+  fgets(alvo, MAX_CHAR, stdin);
+  alvo[strcspn(alvo, "\n")] = '\0'; 
+}
+
 Node * criar_lista_Agenda(void){
   Node * inicio = (Node *) malloc (sizeof(Node));
   if(inicio == NULL){
@@ -106,15 +118,15 @@ Node2 * criar_lista_Contato(void){
     exit(1);
     }
   // inicio->dado = NULL;
-  start->dados.idade = 0; //verifica se o start setando a idade é zero
-  start->proxi = NULL;
+  start->dado.idade = 0; //verifica se o start setando a idade é zero
+  start->prox = NULL;
   return start;
 }
 
-Node2 * lista_busca_Contato(int element, Node2 * m, Node2** previous){
+Node2 * lista_busca_Contato(char* element, Node2 * m, Node2** previous){
   Node2 * pointer;
-  for(pointer = m; pointer != NULL; pointer = pointer->proxi){
-    if(pointer->dados.idade == element){
+  for(pointer = m; pointer != NULL; pointer = pointer->prox){
+    if(strcmp(pointer->dado.nome, element)==0){
       return pointer;
     }
     if (previous != NULL)
@@ -123,7 +135,7 @@ Node2 * lista_busca_Contato(int element, Node2 * m, Node2** previous){
   return NULL;
 }
 
-void lista_retira_Contato(Node2 * m, int w){
+void lista_retira_Contato(Node2 * m, char* w){
   Node2** previousAddress = (Node2**) malloc(sizeof(Node2*));
   if(previousAddress == NULL){
     printf("Erro ao alocar memória!");
@@ -133,9 +145,9 @@ void lista_retira_Contato(Node2 * m, int w){
   Node2 * previous = *previousAddress;
   if (target != NULL) {
     if (previous != NULL) {
-      previous->proxi = target->proxi;
+      previous->prox = target->prox;
     } else {
-      *m = *m->proxi;
+      *m = *m->prox;
     }
   }
 }
@@ -144,8 +156,8 @@ void lista_insere_Contato(Node2 * m, contatos w){
   // Node* l = lista principal
   // Agenda v = nova informação
   Node2 * target = lista_busca_Contato(0,m,NULL);
-  target->dados = w;
-  target->proxi = (Node2*) malloc(sizeof(Node2));
+  target->dado = w;
+  target->prox = (Node2*) malloc(sizeof(Node2));
 }
 
 int lista_vazia_Contato(Node2 * m){
@@ -154,8 +166,8 @@ int lista_vazia_Contato(Node2 * m){
 
 void lista_imprime_Contato(Node2 * m){
   Node2 * pointer;
-    for(pointer = m; pointer->proxi != NULL; pointer = pointer->proxi){
-        printf("Nome = %s\nIdade = %u\nTelefone = %u\n", pointer->dados.nome, pointer->dados.idade, pointer->dados.tel);
+    for(pointer = m; pointer->prox != NULL; pointer = pointer->prox){
+        printf("Nome = %s\nIdade = %u\nTelefone = %u\n", pointer->dado.nome, pointer->dado.idade, pointer->dado.tel);
     //lembrete: consertar erro de leitura do tipo de dado
     }
 }
@@ -164,28 +176,32 @@ void lista_libera_Contato(Node2 * m){
   Node2 * pointer = m;
     Node2 * interim;
     while (pointer != NULL) {
-        interim = pointer->proxi;
+        interim = pointer->prox;
         free(pointer);
         pointer = interim;
     }
 }
 
-void adiciona_contato(contatos Contato){
+void imprime_contato(Node2 * contato){
+  printf("Nome: %s\nIdade: %i\nTelefone: %i\nEmail: %s\n",contato->dado.nome,contato->dado.idade,contato->dado.tel,contato->dado.email);
+}
+
+void adiciona_contato(contatos Contato){ // Revisar
   int qnt_add, index;
   contatos contatoADD;
   printf("quantidade add: \n");
   scanf("%d", &qnt_add);
   for(index = 0; index < qnt_add; index++){
     printf("Nome: \n");
-    fgets(contatoADD.nome, MAX_CHAR, stdin);
+    fgets(contatoADD.nome, MAX_CHAR, stdin); // usar editar_char()
     //contatoADD.nome[strcspn(contatoADD.nome, "\n")] = '\0'; // remover o caractere '\n' do final da string
     printf("Idade: \n");
-    scanf("%u", &contatos.idade);
+    scanf("%u", &contatoADD.idade);
     printf("Telefone: \n");
-    scanf("%u", &contatos.tel);
+    scanf("%u", &contatoADD.tel);
     getchar();
     printf("E-mail: \n");
-    fgets(contatoADD.email, MAX_CHAR, stdin);
+    fgets(contatoADD.email, MAX_CHAR, stdin); // usar editar_char()
     //contatoADD.email[strcspn(contatoADD.email, "\n")] = '\0'; 
     //contatos[*qnt_add] = contatoADD;
     //*contatoADD = contatoADD + 1;
@@ -196,14 +212,22 @@ void adiciona_contato(contatos Contato){
   //return(contatoADD);
 }
 
-void remover_contato(contatos Contato){
-  contatos contatoRemov;
+void remover_contato(Node2 * contatos){
   int qnt_remove, index, cont, procura = 0;
-  printf("informe o codigo da agenda que quer remover um contato \n");
-  scanf("%d", &Agenda->cod); //concertar
-  printf("quantos remove \n");
+  char* nome = (char*) malloc(MAX_CHAR*sizeof(char));
+  Node2* alvo = (Node2*) malloc(sizeof(Node2));
+  printf("Quantos contatos deseja remover?\n");
   scanf("%d", &qnt_remove);
   for(index = 0; index < qnt_remove; index++){
+    printf("Dite o nome do contato que deseja remover:\n");
+    editar_char(nome);
+    alvo=lista_busca_Contato(nome, contatos, NULL);
+    if (alvo){
+      lista_retira_Contato(alvo, nome);
+    } else {
+      printf("Contato não encontrado na agenda.\n");
+      continue;
+    }
     /*for (int index = 0; index < *contatoRemov; index++) { //adicionar nas funções de lista agenda: contatoRemov 
         if (strcmp(contatos[index].nome, nome) == 0) {
             procura = 1;
@@ -223,62 +247,80 @@ void remover_contato(contatos Contato){
   //return(contatoRemov);
 }
 
-void imprimir_contato_cadastrado(){
-  int index;
-  for(index = 0; index < qnt_total; index++){
-    printf("Nome: %s\nIdade: %u\nTelefone: %u\nEmail: %s\n", contatos.nome, contatos.idade, contatos.tel, contatos.email);
+void imprimir_contatos_cadastrado(Node * l){ // Imprimir contatos de uma agenda específica
+  int cod; 
+  printf("Dite o código da agenda para listar contatos:");
+  scanf("%i",&cod);
+  Node * alvo = lista_busca_Agenda(cod, l, NULL);
+  Node2 * index;
+  for(index = alvo->dado.contato; index != NULL; index = index->prox){
+    printf("Nome: %s\nIdade: %u\nTelefone: %u\nEmail: %s\n", index->dado.nome, index->dado.idade, index->dado.tel, index->dado.email);
   }
   //lista_imprime_Contato(lista2);
 }
 
-void editar_contato(){
-  int index, procura = 0;
-    for (index = 0; index < Contato; index++) {
-        if (strcmp(contatos[index].nome, nome) == 0) {
-            procura = 1;
-            printf("Digite a nova idade: \n");
-            fgets(contatos[index].nome, MAX_CHAR, stdin);
-            printf("Digite o novo número de telefone: \n");
-            scanf("%u", contatos[index].tel);
-            getchar();
-            printf("Digite o novo endereço de e-mail: \n");
-            scanf("%s", contatos[index].email);
-            getchar();
-            printf("Contato %s atualizado com sucesso!\n", nome);
-            break;
-        }
-    }
-    if (!procura) {
-        printf("Contato %s não encontrado na agenda.\n", nome);
-    }
+void editar_contato(Node * l){ // Contato único
+  int cod; 
+  printf("Dite o código da agenda para editar um contato:");
+  scanf("%i",&cod);
+  Node * alvoAgenda = lista_busca_Agenda(cod, l, NULL);
+  printf("Digite o nome do contato que deseja editar:");
+  char* nome = (char*) malloc(MAX_CHAR*sizeof(char));
+  editar_char(nome);
+  Node2 * alvoContato = lista_busca_Contato(nome, alvoAgenda->dado.contato, NULL);
+  Node2 * index;
+  if (alvoContato!=NULL) {
+      printf("Digite a nova idade: \n");
+      editar_char(alvoContato->dado.nome);
+      printf("Digite o novo número de telefone: \n");
+      scanf("%i", &alvoContato->dado.tel);
+      getchar();
+      printf("Digite o novo endereço de e-mail: \n");
+      editar_char(alvoContato->dado.email);
+      printf("Contato %s atualizado com sucesso!\n", nome);
+  } else {
+    printf("Contato %s não encontrado na agenda.\n", nome);
+  }
 }
 
-void buscar_contato(){
-  int index, procura = 0;
-    for (index = 0; index < Contato; index++) {
-        if (strcmp(contatos[index].nome, nome) == 0) {
-            procura = 1;
-            printf("Nome: %s\n", contatos[index].nome);
-            printf("Idade: %u", contatos[index].idade);
-            printf("Telefone: %s\n", contatos[index].tel);
-            printf("E-mail: %s\n", contatos[index].email);
-            break;
-        }
-    }
-    if (!procura) {
-        printf("Contato %s não encontrado na agenda.\n", nome);
-    }
+void buscar_contato(Node * l){
+  int cod;
+  printf("Digite qual agenda deseja buscar um contato:\n");
+  scanf("%i",&cod);
+  Node * alvoAgenda = lista_busca_Agenda(cod, l, NULL);
+  printf("Digite nome do contato:\n");
+  char * alvo;
+  editar_char(alvo);
+  Node2 * alvoContato = lista_busca_Contato(alvo, alvoAgenda->dado.contato, NULL);
+  if (alvoContato!=NULL){
+    imprime_contato(alvoContato);
+  } else {
+    printf("Contato não encontrado.\n");
+  }
 }
 
+/*
 void consultar_contato_em_agenda(){
-
+  char nome[MAX_CHAR];
+  printf("Digite o nome do contato: ");
+  fgets(nome, MAX_CHAR, stdin);
+  int index, procura = 0;
+  for (index = 0; index < Contatos; index++) {
+      if (strcmp(Agenda[index].contatos.nome, nome) == 0) {
+          procura = 1;
+          printf("Nome: %s\n", agenda[index].contatos.nome);
+          printf("Idade: %u\n", agenda[index].contatos.idade);
+          printf("Telefone: %u\n", agenda[index].contatos.tel);
+          printf("E-mail: %s\n", agenda[index].contatos.email);
+          break;
+        }
+    }
+    if (!procura) {
+        printf("Contato %s não encontrado na agenda.\n", nome);
+    }
 }
-
+*/
 void quantitativo_agenda(){
-
-}
-
-void sair(){
 
 }
 
@@ -357,7 +399,7 @@ int main(void) {
   lista_insere_Contato(lista2, novoContato);
   lista_imprime_Contato(lista2);
   printf("------------------------------------------------\n");
-  lista_retira_Contato(lista2, 19);
+  // lista_retira_Contato(lista2, 19);
   lista_imprime_Contato(lista2);
   lista_libera_Contato(lista2);
 
