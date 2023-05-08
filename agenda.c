@@ -193,29 +193,31 @@ void adiciona_contato(contatos Contato){ // Revisar
   scanf("%d", &qnt_add);
   for(index = 0; index < qnt_add; index++){
     printf("Nome: \n");
-    fgets(contatoADD.nome, MAX_CHAR, stdin); // usar editar_char()
-    //contatoADD.nome[strcspn(contatoADD.nome, "\n")] = '\0'; // remover o caractere '\n' do final da string
+    editar_char(contatoADD.nome);
     printf("Idade: \n");
     scanf("%u", &contatoADD.idade);
     printf("Telefone: \n");
     scanf("%u", &contatoADD.tel);
-    getchar();
     printf("E-mail: \n");
-    fgets(contatoADD.email, MAX_CHAR, stdin); // usar editar_char()
-    //contatoADD.email[strcspn(contatoADD.email, "\n")] = '\0'; 
+    editar_char(contatoADD.email); 
     //contatos[*qnt_add] = contatoADD;
     //*contatoADD = contatoADD + 1;
     printf("Contato adicionado com sucesso!\n");
-
-    //lista_insere_Contato(lista2, novoContato);
   }
-  //return(contatoADD);
 }
 
 void remover_contato(Node2 * contatos){
   int qnt_remove, index, cont, procura = 0;
   char* nome = (char*) malloc(MAX_CHAR*sizeof(char));
+  if(nome == NULL){
+    printf("Erro ao alocar memória");
+    exit(1);
+  }
   Node2* alvo = (Node2*) malloc(sizeof(Node2));
+  if(alvo == NULL){
+    printf("Erro ao alocar memória");
+    exit(1);
+  }
   printf("Quantos contatos deseja remover?\n");
   scanf("%d", &qnt_remove);
   for(index = 0; index < qnt_remove; index++){
