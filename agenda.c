@@ -61,59 +61,10 @@ Node *lista_busca_Agenda(int elemento, Node *l, Node **anterior){
   return NULL;
 }
 
-void lista_retira_Agenda(Node *l, int v){
-  Node **anteriorAddress = (Node **)malloc(sizeof(Node *));
-  if (anteriorAddress == NULL){
-    printf("Erro ao alocar memória!");
-    exit(1);
-  }
-  Node *alvo = lista_busca_Agenda(v, l, anteriorAddress);
-  Node *anterior = *anteriorAddress;
-  if (alvo != NULL){
-    if (anterior != NULL){
-      anterior->prox = alvo->prox;
-    }else{
-      *l = *l->prox;
-    }
-  }
-}
-
 void lista_insere_Agenda(Node *l, Agenda v){
   Node *alvo = lista_busca_Agenda(0, l, NULL);
   alvo->dado = v;
   alvo->prox = (Node *)malloc(sizeof(Node));
-}
-
-int lista_vazia_Agenda(Node *l){ 
-  return (l == NULL);
-}
-
-void lista_imprime_Agenda(Node *l, int quantidadeAdiciona){
-  Node *p;
-  for (p = l; p->prox != NULL; p = p->prox){
-    printf("Nome = %s\nCódigo = %i\nNúmero = %i\n", p->dado.nome, p->dado.cod, p->dado.num);
-  }
-}
-
-void lista_libera_Agenda(Node *l){
-  Node *p = l;
-  Node *temp;
-  while (p != NULL){
-    temp = p->prox;
-    free(p);
-    p = temp;
-  }
-}
-
-Node2 *criar_lista_Contato(void){
-  Node2 *start = (Node2 *)malloc(sizeof(Node2));
-  if (start == NULL){
-    printf("Erro ao tentar alocar memória");
-    exit(1);
-  }
-  start->dado.idade = 0; 
-  start->prox = NULL;
-  return start;
 }
 
 Node2 *lista_busca_Contato(char *element, Node2 *m, Node2 **previous){
@@ -154,30 +105,9 @@ void lista_insere_Contato(Node2 *m, contatos w){
   target->prox = (Node2 *)malloc(sizeof(Node2));
 }
 
-int lista_vazia_Contato(Node2 *m){
-  return (m == NULL);
-}
-
 void imprime_contato(Node2 *contato){
   if (contato->dado.idade != 0){
     printf("\nNome: %s\nIdade: %u\nTelefone: %lu\nEmail: %s\n", contato->dado.nome, contato->dado.idade, contato->dado.tel, contato->dado.email);
-  }
-}
-
-void lista_imprime_Contato(Node2 *m){
-  Node2 *pointer;
-  for (pointer = m; pointer->prox != NULL; pointer = pointer->prox){
-    imprime_contato(pointer);
-  }
-}
-
-void lista_libera_Contato(Node2 *m){
-  Node2 *pointer = m;
-  Node2 *interim;
-  while (pointer != NULL){
-    interim = pointer->prox;
-    free(pointer);
-    pointer = interim;
   }
 }
 
