@@ -19,13 +19,13 @@ void lista_retira_Agenda(Node *l, int v);
 
 void lista_insere_Agenda(Node *l, Agenda v);
 
-int lista_vazia_Agenda(Node *l);
+int lista_vazia_Agenda(Node *l); 
 
-void lista_imprime_Agenda(Node *l, int quantidadeAdiciona);
+void lista_imprime_Agenda(Node *l, int quantidadeAdiciona); 
 
-void lista_libera_Agenda(Node *l);
+void lista_libera_Agenda(Node *l); 
 
-Node2 *criar_lista_Contato(void);
+Node2 *criar_lista_Contato(void); 
 
 Node2 *lista_busca_Contato(char *element, Node2 *m, Node2 **previous);
 
@@ -33,34 +33,33 @@ void lista_retira_Contato(Node2 *m, char *w);
 
 void lista_insere_Contato(Node2 *m, contatos w);
 
-int lista_vazia_Contato(Node2 *m);
+int lista_vazia_Contato(Node2 *m); 
 
 void imprime_contato(Node2 *contato);
 
-void lista_imprime_Contato(Node2 *m);
+void lista_imprime_Contato(Node2 *m); 
 
 void lista_libera_Contato(Node2 *m);
 
-void adiciona_contato(Node *l, int quantidadeAdiciona);
+void limparMemoriaNodes(Node * principio); 
 
-void remover_contato(Node *l);
+void adiciona_contato(Node *l, int quantidadeAdiciona); 
 
-void imprimir_contatos_cadastrado(Node *l);
+void remover_contato(Node *l); 
 
-void editar_contato(Node *l);
+void imprimir_contatos_cadastrado(Node *l); 
 
-void buscar_contato(Node *l);
+void editar_contato(Node *l); 
 
-void consultar_contato_em_agenda(Node *l);
+void buscar_contato(Node *l); 
 
-void quantitativo_agenda(Node *l);
+void consultar_contato_em_agenda(Node *l); 
 
-void gnomeSort(Node2 **inicio);
+void quantitativo_agenda(Node *l); 
 
-void exportarAgenda(Node *inicio, char *nomeArquivo);
+void gnomeSort(Node2 **inicio); 
 
-Node *importarAgenda(char *nomeArquivo);
+void arquivoAgenda(Node *inicio, char *nomeArquivo); 
 
 
 #endif
- 
