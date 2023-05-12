@@ -181,7 +181,23 @@ void lista_libera_Contato(Node2 *m){
   }
 }
 
+void limparMemoriaNodes(Node * principio){
+  Node * agendaTemp, *agendaLimpar;
+  Node2 * contatoTemp, *contatoLimpar;
+  for (agendaTemp = principio; agendaTemp != NULL; ){ 
+    for (contatoTemp = agendaTemp->dado.contato; contatoTemp !=NULL; ){ 
+      contatoLimpar = contatoTemp;
+      contatoTemp = contatoTemp->prox; 
+      free(contatoLimpar); 
+    }
+    agendaLimpar = agendaTemp;
+    agendaTemp = agendaTemp->prox; 
+    free(agendaLimpar); 
+  }
+}
+
 void adiciona_contato(Node *l, int quantidadeAdiciona){
+  Agenda novaAgenda;
   int index, cod;
   for (index = 0; index < quantidadeAdiciona; index++){
     Node2 *contatoAdiciona = (Node2 *)malloc(sizeof(Node2));
@@ -208,7 +224,6 @@ void adiciona_contato(Node *l, int quantidadeAdiciona){
       scanf(" %i", &escolha); getchar();
       switch (escolha){
       case 1:
-        Agenda novaAgenda;
         printf("\nDigite o nome da agenda:\n");
         editar_char(novaAgenda.nome);
         novaAgenda.cod = cod;
@@ -390,7 +405,7 @@ void gnomeSort(Node2 **inicio){
   }
 }
 
-void exportarAgenda(Node *inicio, char *nomeArquivo){ 
+void arquivoAgenda(Node *inicio, char *nomeArquivo){ 
   FILE *arquivo = fopen("Agenda.txt", "w"); 
   if (arquivo == NULL){
     printf("Erro ao abrir o arquivo para escrita.\n"); 
@@ -418,62 +433,4 @@ void exportarAgenda(Node *inicio, char *nomeArquivo){
     temp = temp->prox; 
   }
   fclose(arquivo);                           
-}
-
-Node *importarAgenda(char *nomeArquivo){    
-  FILE *arquivo = fopen(nomeArquivo, "r"); 
-  if (arquivo == NULL){                    
-    printf("Erro ao abrir o arquivo para leitura.\n");
-    return NULL;
-  }
-
-  Node *inicio = NULL; 
-  Node *temp = NULL;   
-
-  char linha_temp[MAX_CHAR]; 
-
-  while (fgets(linha_temp, MAX_CHAR, arquivo) != NULL) 
-  {
-    if (linha_temp[strlen(linha_temp) - 1] == '\n'){ 
-      linha_temp[strlen(linha_temp) - 1] = '\0';
-    }if (strcmp(linha_temp, "Listagem de contatos chegou ao fim") == 0){ 
-      if (inicio == NULL){ 
-        inicio = temp; 
-      }else{ 
-        Node *ultimo = inicio;       
-        while (ultimo->prox != NULL){ 
-          ultimo = ultimo->prox; 
-        }
-        ultimo->prox = temp; 
-      }
-      temp = NULL;
-    }else{ 
-      if (temp == NULL){ 
-        temp = (Node *)malloc(sizeof(Node)); 
-        if (temp == NULL){ 
-          printf("Alocação de memória mal sucedida");
-          exit(1);
-        }
-        strcpy(temp->dado.nome, linha_temp); 
-      }else if(temp->dado.contato == NULL){ 
-        Node2 *contatoTemp= (Node2 *)malloc(sizeof(Node2)); 
-        if(contatoTemp == NULL){
-          printf("Alocação de memória mal sucedida"); 
-          exit(1);
-        }
-        strcpy(contatoTemp->dado.nome, linha_temp); 
-        temp->dado.contato = contatoTemp; 
-      }else{ 
-        Node2 *ultimo = temp->dado.contato; 
-        while (ultimo->prox != NULL){ 
-          ultimo = ultimo->prox;
-        }
-        Node2 *contatoTemp = (Node2 *)malloc(sizeof(Node2)); 
-        strcpy(contatoTemp->dado.nome, linha_temp); 
-        ultimo->prox = contatoTemp; 
-      }
-    }
-  }
-  fclose(arquivo); 
-  return inicio; 
 }
