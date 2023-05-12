@@ -49,7 +49,8 @@ void menu(Node * lista){
       quantitativo_agenda(lista);
     break;
     case 8:
-      exportarAgenda(lista,arquivoNome);
+      arquivoAgenda(lista,arquivoNome);
+      limparMemoriaNodes(lista);
       return; 
     break;
   }
